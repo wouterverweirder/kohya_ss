@@ -503,7 +503,7 @@ def train_model(
     lr_warmup_steps = round(float(int(lr_warmup) * int(max_train_steps) / 100))
     log.info(f'lr_warmup_steps = {lr_warmup_steps}')
 
-    run_cmd = f'accelerate launch --num_cpu_threads_per_process={num_cpu_threads_per_process} "train_db.py"'
+    run_cmd = f'python /content/gdrive/MyDrive/sd/kohya_ss/train_db.py'
     if v2:
         run_cmd += ' --v2'
     if v_parameterization:
@@ -624,7 +624,7 @@ def train_model(
         if os.name == 'posix':
             os.system(run_cmd)
         else:
-            subprocess.run(run_cmd)
+            subprocess.Popen(run_cmd, cwd=f'/content/gdrive/MyDrive/sd/kohya_ss')
 
         # check if output_dir/last is a folder... therefore it is a diffuser model
         last_dir = pathlib.Path(f'{output_dir}/{output_name}')

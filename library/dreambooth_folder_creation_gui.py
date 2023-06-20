@@ -44,12 +44,12 @@ def dreambooth_folder_preparation(
 
     # Check for instance prompt
     if util_instance_prompt_input == '':
-        msgbox('Instance prompt missing...')
+        print('Instance prompt missing...')
         return
 
     # Check for class prompt
     if util_class_prompt_input == '':
-        msgbox('Class prompt missing...')
+        print('Class prompt missing...')
         return
 
     # Create the training_dir path

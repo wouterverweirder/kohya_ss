@@ -24,7 +24,7 @@ def check_model(model):
     if not model:
         return True
     if not os.path.isfile(model):
-        msgbox(f'The provided {model} is not a file')
+        print(f'The provided {model} is not a file')
         return False
     return True
 
@@ -67,7 +67,7 @@ def merge_lora(
         if not check_model(model):
             return
 
-    run_cmd = f'{PYTHON} "{os.path.join("networks","merge_lora.py")}"'
+    run_cmd = f'{PYTHON} /content/gdrive/MyDrive/sd/kohya_ss/networks/merge_lora.py'
     if sd_model:
         run_cmd += f' --sd_model "{sd_model}"'
     run_cmd += f' --save_precision {save_precision}'
@@ -91,7 +91,7 @@ def merge_lora(
     if os.name == 'posix':
         os.system(run_cmd)
     else:
-        subprocess.run(run_cmd)
+        subprocess.Popen(run_cmd, cwd=f'/content/gdrive/MyDrive/sd/kohya_ss')
 
     log.info('Done merging...')
 

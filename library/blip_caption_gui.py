@@ -26,20 +26,20 @@ def caption_images(
 ):
     # Check for caption_text_input
     # if caption_text_input == "":
-    #     msgbox("Caption text is missing...")
+    #     print("Caption text is missing...")
     #     return
 
     # Check for images_dir_input
     if train_data_dir == '':
-        msgbox('Image folder is missing...')
+        print('Image folder is missing...')
         return
 
     if caption_file_ext == '':
-        msgbox('Please provide an extension for the caption files.')
+        print('Please provide an extension for the caption files.')
         return
 
     log.info(f'Captioning files in {train_data_dir}...')
-    run_cmd = f'{PYTHON} "finetune/make_captions.py"'
+    run_cmd = f'{PYTHON} /content/gdrive/MyDrive/sd/kohya_ss/finetune/make_captions.py'
     run_cmd += f' --batch_size="{int(batch_size)}"'
     run_cmd += f' --num_beams="{int(num_beams)}"'
     run_cmd += f' --top_p="{top_p}"'
@@ -58,7 +58,7 @@ def caption_images(
     if os.name == 'posix':
         os.system(run_cmd)
     else:
-        subprocess.run(run_cmd)
+        subprocess.Popen(run_cmd, cwd=f'/content/gdrive/MyDrive/sd/kohya_ss')
 
     # Add prefix and postfix
     add_pre_postfix(

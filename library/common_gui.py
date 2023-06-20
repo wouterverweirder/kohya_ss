@@ -81,7 +81,7 @@ def output_message(msg='', title='', headless=False):
     if headless:
         log.info(msg)
     else:
-        msgbox(msg=msg, title=title)
+        print(msg=msg, title=title)
 
 
 def update_my_data(my_data):
@@ -410,7 +410,7 @@ def find_replace(
     log.info('Running caption find/replace')
 
     if not has_ext_files(folder_path, caption_file_ext):
-        msgbox(
+        print(
             f'No files with extension {caption_file_ext} were found in {folder_path}...'
         )
         return
@@ -436,7 +436,7 @@ def find_replace(
 
 def color_aug_changed(color_aug):
     if color_aug:
-        msgbox(
+        print(
             'Disabling "Cache latent" because "Color augmentation" has been selected...'
         )
         return gr.Checkbox.update(value=False, interactive=False)

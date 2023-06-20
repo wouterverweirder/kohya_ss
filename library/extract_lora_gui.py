@@ -32,24 +32,24 @@ def extract_lora(
 ):
     # Check for caption_text_input
     if model_tuned == '':
-        msgbox('Invalid finetuned model file')
+        print('Invalid finetuned model file')
         return
 
     if model_org == '':
-        msgbox('Invalid base model file')
+        print('Invalid base model file')
         return
 
     # Check if source model exist
     if not os.path.isfile(model_tuned):
-        msgbox('The provided finetuned model is not a file')
+        print('The provided finetuned model is not a file')
         return
 
     if not os.path.isfile(model_org):
-        msgbox('The provided base model is not a file')
+        print('The provided base model is not a file')
         return
 
     run_cmd = (
-        f'{PYTHON} "{os.path.join("networks","extract_lora_from_models.py")}"'
+        f'{PYTHON} /content/gdrive/MyDrive/sd/kohya_ss/networks/extract_lora_from_models.py'
     )
     run_cmd += f' --save_precision {save_precision}'
     run_cmd += f' --save_to "{save_to}"'
@@ -68,7 +68,7 @@ def extract_lora(
     if os.name == 'posix':
         os.system(run_cmd)
     else:
-        subprocess.run(run_cmd)
+        subprocess.Popen(run_cmd, cwd=f'/content/gdrive/MyDrive/sd/kohya_ss')
 
 
 ###

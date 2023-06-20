@@ -22,16 +22,16 @@ def caption_images(
 ):
     # Check for images_dir
     if not images_dir:
-        msgbox('Image folder is missing...')
+        print('Image folder is missing...')
         return
 
     if not caption_ext:
-        msgbox('Please provide an extension for the caption files.')
+        print('Please provide an extension for the caption files.')
         return
 
     if caption_text:
         log.info(f'Captioning files in {images_dir} with {caption_text}...')
-        run_cmd = f'python "tools/caption.py"'
+        run_cmd = f'python /content/gdrive/MyDrive/sd/kohya_ss/tools/caption.py'
         run_cmd += f' --caption_text="{caption_text}"'
         if overwrite:
             run_cmd += f' --overwrite'
@@ -45,7 +45,7 @@ def caption_images(
         if os.name == 'posix':
             os.system(run_cmd)
         else:
-            subprocess.run(run_cmd)
+            subprocess.Popen(run_cmd, cwd=f'/content/gdrive/MyDrive/sd/kohya_ss')
 
     if overwrite:
         if prefix or postfix:
@@ -65,7 +65,7 @@ def caption_images(
             )
     else:
         if prefix or postfix:
-            msgbox(
+            print(
                 'Could not modify caption files with requested change because the "Overwrite existing captions in folder" option is not selected...'
             )
 

@@ -395,7 +395,7 @@ def train_model(
         if not os.path.exists(train_dir):
             os.mkdir(train_dir)
 
-        run_cmd = f'{PYTHON} finetune/merge_captions_to_metadata.py'
+        run_cmd = f'python /content/gdrive/MyDrive/sd/kohya_ss/finetune/merge_captions_to_metadata.py'
         if caption_extension == '':
             run_cmd += f' --caption_extension=".caption"'
         else:
@@ -412,7 +412,7 @@ def train_model(
             if os.name == 'posix':
                 os.system(run_cmd)
             else:
-                subprocess.run(run_cmd)
+                subprocess.Popen(run_cmd, cwd=f'/content/gdrive/MyDrive/sd/kohya_ss')
 
     # create images buckets
     if generate_image_buckets:
@@ -438,7 +438,7 @@ def train_model(
             if os.name == 'posix':
                 os.system(run_cmd)
             else:
-                subprocess.run(run_cmd)
+                subprocess.Popen(run_cmd, cwd=f'/content/gdrive/MyDrive/sd/kohya_ss')
 
     image_num = len(
         [
@@ -473,7 +473,7 @@ def train_model(
     lr_warmup_steps = round(float(int(lr_warmup) * int(max_train_steps) / 100))
     log.info(f'lr_warmup_steps = {lr_warmup_steps}')
 
-    run_cmd = f'accelerate launch --num_cpu_threads_per_process={num_cpu_threads_per_process} "./fine_tune.py"'
+    run_cmd = f'python /content/gdrive/MyDrive/sd/kohya_ss/fine_tune.py'
     if v2:
         run_cmd += ' --v2'
     if v_parameterization:
@@ -589,7 +589,7 @@ def train_model(
         if os.name == 'posix':
             os.system(run_cmd)
         else:
-            subprocess.run(run_cmd)
+            subprocess.Popen(run_cmd, cwd=f'/content/gdrive/MyDrive/sd/kohya_ss')
 
         # check if output_dir/last is a folder... therefore it is a diffuser model
         last_dir = pathlib.Path(f'{output_dir}/{output_name}')

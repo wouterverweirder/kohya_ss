@@ -78,13 +78,9 @@ def UI(**kwargs):
     launch_kwargs['server_name'] = server_name
     if username and password:
         launch_kwargs['auth'] = (username, password)
-    if server_port > 0:
-        launch_kwargs['server_port'] = server_port
-    if inbrowser:
-        launch_kwargs['inbrowser'] = inbrowser
     if share:
         launch_kwargs['share'] = share
-    interface.launch(**launch_kwargs)
+    interface.launch(**launch_kwargs, share=True, inline=False, inbrowser=False, debug=True)
 
 
 if __name__ == '__main__':

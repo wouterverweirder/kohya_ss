@@ -28,24 +28,24 @@ def resize_lora(
 ):
     # Check for caption_text_input
     if model == '':
-        msgbox('Invalid model file')
+        print('Invalid model file')
         return
 
     # Check if source model exist
     if not os.path.isfile(model):
-        msgbox('The provided model is not a file')
+        print('The provided model is not a file')
         return
 
     if dynamic_method == 'sv_ratio':
         if float(dynamic_param) < 2:
-            msgbox(
+            print(
                 f'Dynamic parameter for {dynamic_method} need to be 2 or greater...'
             )
             return
 
     if dynamic_method == 'sv_fro' or dynamic_method == 'sv_cumulative':
         if float(dynamic_param) < 0 or float(dynamic_param) > 1:
-            msgbox(
+            print(
                 f'Dynamic parameter for {dynamic_method} need to be between 0 and 1...'
             )
             return
@@ -57,7 +57,7 @@ def resize_lora(
     if device == '':
         device = 'cuda'
 
-    run_cmd = f'{PYTHON} "{os.path.join("networks","resize_lora.py")}"'
+    run_cmd = f'{PYTHON} /content/gdrive/MyDrive/sd/kohya_ss/networks/resize_lora.py'
     run_cmd += f' --save_precision {save_precision}'
     run_cmd += f' --save_to "{save_to}"'
     run_cmd += f' --model "{model}"'
@@ -75,7 +75,7 @@ def resize_lora(
     if os.name == 'posix':
         os.system(run_cmd)
     else:
-        subprocess.run(run_cmd)
+        subprocess.Popen(run_cmd, cwd=f'/content/gdrive/MyDrive/sd/kohya_ss')
 
     log.info('Done resizing...')
 
