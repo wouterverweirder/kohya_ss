@@ -20,11 +20,18 @@ mkdir ".\logs\setup" > nul 2>&1
 call .\venv\Scripts\deactivate.bat
 
 :: Calling external python program to check for local modules
-python .\tools\check_local_modules.py
+python .\setup\check_local_modules.py
 
 call .\venv\Scripts\activate.bat
 
-python .\tools\setup_windows.py
+REM Check if the batch was started via double-click
+IF /i "%comspec% /c %~0 " equ "%cmdcmdline:"=%" (
+    REM echo This script was started by double clicking.
+    cmd /k python .\setup\setup_windows.py
+) ELSE (
+    REM echo This script was started from a command prompt.
+    python .\setup\setup_windows.py
+)
 
 :: Deactivate the virtual environment
 call .\venv\Scripts\deactivate.bat
